@@ -12,3 +12,5 @@ Copy this oauth link into your server: https://discord.com/api/oauth2/authorize?
 Due to discord bot rate limiting I'm limited to animating at roughly 1 fps, so sorry about that (there's not much I can do).
 
 Also, due to the padding, it looks best on a pretty big monitor otherwise text wrapping can happen (which looks pretty bad)
+
+Also, Also, I didn't add the steam yet, but I might (when I get around to it)
