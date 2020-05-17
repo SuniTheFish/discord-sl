@@ -66,10 +66,12 @@ function getLocomotive(i, window) {
   // get components of the train
   const { STR, WHL, COAL } = D51;
   // put together the locomotive and the wheels
-  let locomotive = STR.concat(WHL[WHL.length - (i % WHL.length) - 1]);
-  // add coal
+  let locomotive = STR.concat(WHL[i % WHL.length]);
+  // add coal cart to the end
   locomotive = locomotive.map((str, j) => str + COAL[j]);
+  // find appropriate amount of padding on the left (it might be none)
   const padding = ' '.repeat(Math.max(window - i, 0));
+  // finally, add the padding and crop the locomotive to viewport size (accounting for the padding)
   return locomotive.map((str) => `${padding}${str.substring(i < window ? 0 : i - window + 1, i)}`).join('\n');
 }
 
