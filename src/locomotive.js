@@ -59,9 +59,10 @@ const locLength = D51.STR[0].length + D51.COAL[0].length;
 /**
  * gets the appropriate locomotive for i steps in the animation
  * @param {number} i how far along the animation should be (in characters)
+ * @param {number} window the width of the window of viewing for the bot
  * @returns {string} the string for the animation
  */
-function getLocomotive(i) {
+function getLocomotive(i, window) {
   const {
     STR,
     WHL,
@@ -69,13 +70,12 @@ function getLocomotive(i) {
   } = D51;
   let locomotive = STR.concat(WHL[WHL.length - (i % WHL.length) - 1]);
   // add coal
-  locomotive = locomotive.map((str, j) => str + (COAL[j] ? COAL[j] : ''));
-  const padding = ' '.repeat(locLength - i > 1 ? locLength - i - 1 : 0);
-  return locomotive.map((str) => `${padding}${str.substring(i < locLength ? 0 : i - locLength + 1, i)}`).join('\n');
+  locomotive = locomotive.map((str, j) => str + COAL[j]);
+  const padding = ' '.repeat(Math.max(window - i, 0));
+  return locomotive.map((str) => `${padding}${str.substring(i < window ? 0 : i - window + 1, i)}`).join('\n');
 }
 
 module.exports = {
   length: locLength,
-  animLength: locLength * 2 - 1,
   get: getLocomotive,
 };
